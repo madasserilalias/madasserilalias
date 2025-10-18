@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tezex - Home</title>
+    <title>Tezex - Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <style>
-    /* --- Color Palette --- */
-    /* Primary Teal: #00BCD4 */
-    /* Accent Orange: #FF9800 */
-    /* Dark Navy Blue: #1A237E */
-    /* Light Background: #F9F9F9 */
+    <link rel="stylesheet" href="/css/gallery.style">
+<style>
+    /* --- Refined Color Palette --- */
+    /* Primary Teal: #00BCD4 (Vibrant) */
+    /* Accent Orange: #FF9800 (Highlight) */
+    /* Dark Navy Blue: #1A237E (Base/Footer) */
+    /* Light Background: #F9F9F9 (Page Background) */
     /* Text Color: #333333 */
 
     * {
@@ -19,64 +20,39 @@
         padding: 0;
         box-sizing: border-box;
     }
-    :root {
-        /* Block Colors */
-        --block-blue: #1A237E;
-        --block-green: #006400;
-        --block-black: #000000;
-        --text-light: #ffffff;
+
+    /* 🔑 CRITICAL FIX 1: Ensure HTML and BODY provide a proper viewport for sticky positioning */
+    html, body {
+        height: 100%;
+        /*overflow-x: hidden;*/
     }
+    /* ------------------------------------------------------------------------------------- */
 
     body {
         font-family: 'Poppins', sans-serif;
-        color: #333333;
-        background-color: #F9F9F9;
         line-height: 1.6;
+        color: #333333;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        background-color: #F9F9F9;
+        min-height: 100vh;
     }
 
-    /* --- Global Sections --- */
-    .content-section {
-        padding: 50px 5%;
-        background-color: #fff;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        color: #1A237E; /* Dark Navy */
-        margin-bottom: 20px;
-        position: relative;
-        padding-bottom: 10px;
-    }
-    
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background-color: #FF9800; /* Accent Orange */
-        border-radius: 2px;
-    }
-    
     /* --- Header & Navigation --- */
     #main-header {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         background-color: #fff;
-        /* Reinstated/Confirmed sticky positioning for header structure */
         position: sticky; 
         top: 0;
         z-index: 1000;
-        position: relative; /* Essential for positioning the mobile menu using top: 100% */
+        /* Add relative positioning to anchor the menu when absolute */
+        position: relative; 
     }
 
- /* Top Bar (Contact Info) */
+    /* Top Bar (Contact Info) - Deep Navy Base */
     .top-bar {
-        background-color: #1A237E;
+        background-color: #1A237E; 
         color: #fff;
         padding: 8px 5%;
         display: flex;
@@ -87,23 +63,25 @@
         margin-right: 20px;
     }
     .top-bar a {
-        color: #FF9800;
+        color: #FF9800; /* Bright Orange Accent */
         text-decoration: none;
         transition: color 0.3s;
     }
     .top-bar a:hover {
-        color: #fff;
+        color: #00BCD4; /* Teal Accent Hover */
     }
     .top-bar i {
-        color: #00BCD4;
+        color: #00BCD4; /* Teal Icon */
         margin-right: 5px;
     }
 
+    /* Navbar */
     .navbar {
         display: flex;
         justify-content: space-between; 
         align-items: center;
         padding: 15px 5%;
+        /* Setting this to relative again just in case a parent context is needed */
         position: relative; 
     }
 
@@ -121,22 +99,24 @@
         transition: background-color 0.3s, color 0.3s;
     }
 
+    /* Menu Active/Hover is Orange */
     .nav-links li a:hover, .nav-links li a.active {
-        background-color: #FF9800; /* Orange hover effect */
+        background-color: #FF9800; /* Orange Hover/Active Effect */
         color: #fff;
     }
 
     /* Logo Styling */
     .logo-img {
         width: 150px;
-        /*border: 3px solid #ff9900;*/
+        /*border: 3px solid #FF9800; /* Orange Border */
         height: auto;
         margin: 0;
         margin-right: 40px;
     }
+    
     /* --- Hamburger Menu Icon --- */
     .menu-toggle {
-        display: none;  
+        display: none; 
         font-size: 1.8rem;
         color: #1A237E; 
         cursor: pointer;
@@ -144,328 +124,110 @@
         padding: 5px;
     }
 
-#hero-section {
-    height: 70vh;
-    /* Initial background. This will be the grey background you showed. */
-    background-color: #808080; /* Grey from your provided image */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-    position: relative;
-    overflow: hidden; /* Crucial for controlling the image movement */
-
-    /* Add transition for smooth background change */
-    transition: background-image 0.5s ease-in-out, background-color 0.5s ease-in-out; 
-}
-
-/* Pseudo-element for the dynamic background image */
-#hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
-    z-index: 1;
-
-    /* Initial state: Hidden or completely transparent */
-    background-image: url('substation.jpg'); /* REPLACE with your substation image path */
-    background-size: cover;
-    background-position: center; /* Adjust as needed */
-    opacity: 0; /* Initially hidden */
-    transform: translateY(0); /* Initial position for the slide effect */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Smooth transition for hover */
-}
-
-/* Hover Effect for the Hero Section */
-#hero-section:hover::before {
-    opacity: 1; /* Make the background image visible */
-    transform: translateY(-10px); /* Slide up slightly on hover */
-}
-
-/* Adjust the overlay when the image is visible, or keep it consistent */
-#hero-section:hover::before {
-    background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay on hover if desired */
-}
-
-
-.hero-content {
-    z-index: 10;
-    padding: 20px;
-    position: relative; /* Ensure content stays above the overlay/image */
-}
-.hero-content h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* Add text shadow for better readability over busy image */
-}
-.hero-content p {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
-.highlight {
-    color: #FF9800; /* Orange highlight for service keywords */
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin: 0 5px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
-
-/* ------------------------------------
-      2. Main Content Blocks
-      ------------------------------------ */
+    /* --- Main Content Area --- */
     main {
-        flex-grow: 1; 
-        padding: 0;
+        flex-grow: 1;
+        padding: 0; 
     }
     
-    .about-container {
-        /* Removed padding from here as it's now handled by the .content-section above for consistency */
-        padding: 0 60px 40px; 
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-        margin-top: 10px;
-        align-items: stretch;
-        max-width: 1200px; /* Aligns with navbar max-width */
-        margin: 0 auto;
-    }
+    /* ====================================
+        3. GALLERY STYLING
+        ====================================
+    */
 
-    .info-block {
-        color: var(--text-light);
-        padding: 30px;
-        border-radius: 12px;
-        width: 45%; 
-        max-width: 600px;
-        line-height: 1.5;
-        font-size: 1.1em;
-        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease-in-out;
-    }
-    .block-1 { background-color: var(--block-blue); }
-    .block-2 { background-color: var(--block-green); }
-    .block-3 { background-color: var(--block-black); }
-
-    .block-3 {
-        width: 95%; 
+    /* Wrapper for the entire gallery component */
+    .carousel-wrapper {
         max-width: 1000px;
-        margin: 0 auto;
+        /* Set margin-top to 0 to touch the navbar */
+        margin: 0 auto 10px; 
+        background-color: #2c3e50; /* Deep Charcoal Gray (Professional) */
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        border-radius: 0 0 8px 8px; /* Optional: Keep bottom border radius */
+        overflow: hidden;
+    }
+    
+    /* Main Viewport Container */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 500px; 
+        overflow: hidden; 
     }
 
-    /* Hover Effect */
-    .info-block:hover {
-        transform: translateY(-5px) scale(1.02); 
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    /* Track: Holds all images and moves horizontally */
+    .carousel-track {
+        display: flex;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
     }
-    .info-block::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
+
+    /* Item: Each individual slide */
+    .carousel-item {
+        flex: 0 0 100%;
+        height: 100%;
+    }
+
+    /* Image styling */
+    .carousel-item img {
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.1), transparent 70%);
-        opacity: 1; 
-        z-index: 0;
-        transition: background 0.4s ease-in-out;
-    }
-    .info-block:hover::before {
-        background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.2), transparent 70%);
-    }
-    .info-block * {
-        position: relative;
-        z-index: 1;
+        object-fit: contain; 
+        background-color: #2c3e50; /* Match wrapper background */
     }
 
-    /* List Block Styling */
-    .list-content ul {
-        list-style: none;
-        padding-left: 0;
-    }
-    .list-content li {
-        font-size: 1em; 
-        padding: 5px 0;
-    }
-    .list-content li::before {
-        content: '•';
-        color: #FF9800;
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-    }
-    /* --- Mission/Vision Section --- */
-    #mission-vision {
-        background-color: #E0F7FA; /* Lighter Teal Background */
-        padding: 80px 5%;
-        text-align: center;
-    }
-
-    .mv-container {
-        display: flex;
-        justify-content: space-around;
-        gap: 40px;
-        max-width: 1000px;
-        margin: 40px auto 0;
-    }
-
-    .mv-box {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        flex: 1;
-        transition: transform 0.3s;
-    }
-
-    .mv-box:hover {
-        transform: translateY(-5px);
-    }
-
-    .mv-box i {
-        font-size: 3rem;
-        color: #00BCD4; /* Teal Icon */
-        margin-bottom: 15px;
-    }
-
-    .mv-box h3 {
-        color: #1A237E; /* Dark Navy */
-        margin-bottom: 10px;
-        font-size: 1.5rem;
-    }
-
-    /* --- Contact + Map --- */
-    #contact {
-         
-    }
-
-    .contact-map-container {
-        display: flex;
-        flex-direction: row; 
-        gap: 40px;
-    }
-    .contact-details {
-        flex: 2;    
-        padding: 20px;
-        background-color: #f9f9f9;
-    }
-    .contact-details h2 {
-        color: #1A237E; 
-        font-size: 24px;
-        margin-top: 0;
-        margin-bottom: 15px;
-    }
-    .contact-details hr {
-        border: 0;
-        border-top: 1px solid #00BCD4; /* Teal line */
-        margin: 10px 0 20px 0;
-    }
-    .detail-label {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1A237E;
-        margin-bottom: 5px;
-    }
-    .address-text, .mobile-text, .email-text {
-        font-size: 1rem;
-        line-height: 1.5;
-        margin-bottom: 20px;
-    }
-    .mobile-text a, .email-text a {
-        color: #333333;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .mobile-text a:hover, .email-text a:hover {
-        color: #FF9800;
-    }
-
-    .map-embed {
-        flex: 4;
-    }
-    .map-embed iframe {
-        display: block;
-        width: 100%;
-        min-height: 400px;
-        border: 5px solid #00BCD4; /* Teal border around map */
-        border-radius: 8px;
-    }
-
-    /* --- FAQ Section --- */
-    #faq-section {
-        background-color: #fff;
-        padding: 50px 5%;
-    }
-
-    .faq-item {
-        border: 1px solid #ccc;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    .faq-question {
-        background-color: #1A237E; /* Dark Navy */
-        color: #fff;
-        padding: 15px 20px;
+    /* Navigation Arrows */
+    .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.6); 
+        border: none;
+        color: #00BCD4; 
+        padding: 15px 10px;
         cursor: pointer;
-        font-weight: 600;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: background-color 0.3s;
+        z-index: 10;
+        transition: background-color 0.3s, color 0.3s;
+        opacity: 0.8;
+    }
+    .carousel-arrow:hover {
+        background-color: #FF9800; 
+        color: #fff;
+        opacity: 1;
     }
 
-    .faq-question:hover {
-        background-color: #00BCD4; /* Teal hover */
-    }
-    
-    .faq-question i {
-        font-size: 1.2rem;
-        transition: transform 0.3s;
-    }
-
-    .faq-answer {
-        padding: 0 20px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        background-color: #f4f4f4;
+    .arrow-left { left: 0; border-radius: 0 5px 5px 0; }
+    .arrow-right { right: 0; border-radius: 5px 0 0 5px; }
+    .carousel-arrow svg {
+        fill: currentColor;
+        width: 25px;
+        height: 25px;
+        display: block;
     }
 
-    .faq-answer p {
-        padding: 15px 0;
-        margin: 0;
-        font-size: 0.95rem;
-        color: #555;
+    /* CRITICAL: Arrow Disappearance at Boundaries */
+    .carousel-arrow:disabled {
+        opacity: 0.3; 
+        cursor: not-allowed;
+        color: #888;
     }
 
-    .faq-item.active .faq-answer {
-        max-height: 200px; /* Adjust based on content height */
-        padding-top: 15px;
-        padding-bottom: 15px;
+    /* Image Caption */
+    .carousel-caption {
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 1.1em;
+        background-color: #1A237E; /* Deep Navy Caption background */
+        color: #00BCD4; /* Teal text color */
     }
 
-    .faq-item.active .faq-question i {
-        transform: rotate(180deg);
-    }
 
     /* --- Footer --- */
     footer {
         background-color: #1A237E; /* Dark Navy Blue */
         color: #fff;
         padding: 40px 5% 20px;
+        margin-top: auto; 
     }
 
     .footer-content {
@@ -504,7 +266,7 @@
     .footer-logo-col p {
         margin-top: 10px;
         font-size: 0.8rem;
-        color: #00ccff;
+        color: #00BCD4;
     }
     .footer-logo-section img {
         max-width: 150px;
@@ -513,9 +275,6 @@
 
     .footer-links-col ul {
         list-style: none;
-    }
-    .footer-links-col li {
-        margin-bottom: 8px;
     }
     .footer-links-col a {
         color: rgba(255, 255, 255, 0.8);
@@ -532,7 +291,7 @@
     
     /* Back-to-Top Button */
     #back-to-top {
-        display: none;  
+        display: none; 
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -553,62 +312,62 @@
         background-color: #00BCD4;
         transform: translateY(-2px);
     }
-
-    /* --- Responsive adjustments --- */
+/* Underline decoration */
+/*.project-gallery-footer h2::after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 3px;
+    background-color: #FF9800;  /* Orange accent underline */
+    /*margin: 6px auto 0;
+    border-radius: 2px;
+ }*/
+    /* --- Responsive adjustments (Mobile View) --- */
     @media (max-width: 992px) {
         
-        /* General */
-        .section-title {
-            font-size: 2rem;
-        }
-
-        /* Logo/Toggle Alignment - START */
+        /* Logo Fix */
         .logo-img {
             width: 100px;
-            margin: 0; 
+            margin-right: 0;
             border-width: 2px;
         }
 
         /* Hamburger visibility */
-        .menu-toggle {
-           display: block;
-           position: absolute; 
-           right: 5%; /* Matches your navbar padding */
-           top: 50%;
-           transform: translateY(-50%); /* Ensures perfect vertical centering */
-           z-index: 1002;
-        }
-
-        /* Navbar layout: Logo (L) and Toggle (R) */
+        /* Navbar padding */
         .navbar {
-            display: flex;
-            justify-content: space-between; /* MODIFIED: Logo on left, Toggle on right */
-            padding: 10px 5%;
-            flex-direction: row; 
-            align-items: center;
-            position: relative; 
-            margin: 0 auto;
+            padding: 10px 5%; 
         }
-        /* Logo/Toggle Alignment - END */
-
-        /* Mobile Nav Menu (Centrally Aligned) */
+        .menu-toggle {
+        display: block;
+        position: absolute; 
+        right: 5%; /* Matches your navbar padding */
+        top: 50%;
+        transform: translateY(-50%); /* Ensures perfect vertical centering */
+        z-index: 1002;
+        }
+        /* Mobile Nav Menu */
         .nav-links {
-            display: none; /* Keep initial hidden state */ 
+            display: none; 
             flex-direction: column;
-            position: absolute;
-            top: 100%; /* Position right below the header */
+            position: absolute; 
+            top: 100%; /* Guarantees position below the navbar */
+            
             left: 0;
-            width: 100%;    
+            width: 100%; 
+            
             background-color: #fff;
             box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
             border-top: 2px solid #00BCD4;
             padding: 10px 0;
-            z-index: 999; /* Below the header but above content */
+            z-index: 999;
         }
 
-        /*  This is the critical selector. Ensure it uses `display: flex;` */
         .nav-links.open {
-            display: flex;  
+            display: flex; /* Show the menu when the 'open' class is active */
+            /* 🔑 FINAL FIX 2: Limit the height and make menu content scroll internally */
+            /* This ensures the entire header stays sticky, and menu items are accessible */
+            max-height: calc(100vh - 100px); /* 100vh is full screen height. Subtract approximate header height (adjust if needed) */
+            overflow-y: auto; 
         }
 
         .nav-links li {
@@ -621,8 +380,8 @@
             padding: 12px 15px;
             border-radius: 0;
         }
-
-          /* Center Top Bar Content */
+        
+        /* Center Top Bar Content */
         .top-bar {
             flex-direction: column;
             align-items: center;
@@ -637,44 +396,16 @@
             flex-direction: column;
             align-items: center;
         }
-
-        /* Contact and Map Section */
-        .contact-map-container {
-            flex-direction: column;  
-            gap: 20px;
-        }
-
-        .map-embed {
-            height: 300px; /* Mobile default map height */
-        }
-        /* Content Blocks */
-        .about-container {
-            flex-direction: column;
-            padding: 20px 5%; 
-            gap: 20px;
-        }
-        .info-block {
-            width: 100%; 
-            max-width: 100%; 
-            margin: 0; 
-            font-size: 1em;
-        }
-        .block-3 {
-            width: 100%; 
-            max-width: 100%;
-        }
         
-
-        /* Mission/Vision */
-        .mv-container {
-            flex-direction: column;
-            gap: 20px;
+        /* Gallery Mobile Adjustments */
+        .carousel-container {
+            height: 350px; 
         }
-        .mv-box {
-            margin-bottom: 0;
+        .carousel-arrow {
+            padding: 10px 5px;
         }
 
-        /* Footer */
+        /* Other Mobile CSS */
         .footer-content {
             flex-direction: column;
             text-align: center;
@@ -691,8 +422,7 @@
             flex-direction: column;
             align-items: center;      /* centers the whole block in its column */
        }
-
-       .footer-links-col ul {
+        .footer-links-col ul {
            list-style: none;
            padding: 0;
            margin: 0;
@@ -713,14 +443,14 @@
            font-size: 1.2rem;
         }
     }
-</style> 
+</style>
 </head>
 <body>
 
     <header id="main-header">
         <div class="top-bar">
             <div class="contact-info">
-                <span><i class="fas fa-phone-alt"></i> Call Us +91 9895709597, 9400264581</span>
+                <span><i class="fas fa-phone-alt"></i> Call Us +91 9895709597, 8400264581</span>
                 <span><i class="fas fa-envelope"></i> Email: <a href="mailto:tezexeng@gmail.com">tezexeng@gmail.com</a></span>
             </div>
             <div class="location-info">
@@ -730,185 +460,84 @@
         </div>
         
         <nav class="navbar">
-            <a href="/tezex/" class="logo-link">
-                <img src="/tezex/images/logo.png" alt="Tezex Logo" class="logo-img"/>
+             <a href="/tezex/" class="logo-link">
+                 <img src="images/logo.png" alt="Tezex Logo" class="logo-img"/>
             </a>
             <div class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i> 
             </div>
+            <div class="project-gallery-header">
+        
             <ul class="nav-links" id="nav-links">
-               <!--<li><a href="/tezex/" class="active">Home</a></li>-->
-                <li><a href="/tezex/" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="services/">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="gallery/">Gallery</a></li>
-            </ul>
+                <li><a href="/tezex/">Home</a></li>
+                <li><a href="/tezex/#about">About</a></li>
+                <li><a href="/tezex/services/">Services</a></li>
+                <li><a href="/tezex/#contact">Contact</a></li>
+                <li><a href="/tezex/gallery/" class="active">Gallery</a></li>
+                </ul>
         </nav>
     </header>
-      <section id="hero-section" style="background-image: url('');">
-        <div class="hero-content">
-            <h1>We provide high-quality solutions</h1>
-            <p>Tailored to your needs</p>
-            <div>
-                <span class="highlight">Engineering</span> 
-                <span class="highlight">● Procurement</span> 
-                <span class="highlight">● Contracting</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="content" style="padding: 100px 5%; text-align: center;">
-        <h2 style="color: #1A237E;">Innovative Engineering Solutions</h2>
-        <p style="margin-top: 20px;">Leveraging expertise in electrical, mechanical, and instrumentation domains for industrial and commercial projects.</p>
-    </section>
-
-    <section id="about" class="content-section">
-        <h2 class="section-title">About Us</h2>
-    </section>
     
-    <main class="about-container">
-        
-        <div class="info-block block-1">
-            <p><strong>Tezex Engineering Solutions LLP</strong> provides complete Engineering, Procurement, and Contracting (EPC) solutions across multiple industries, emphasizing quality, safety, and innovation in every project.</p>
-        </div>
-        
-        <div class="info-block block-2">
-            <p>Our specialization is in providing **turnkey projects** for the industrial and commercial sectors, covering everything from concept to final commissioning.</p>
-        </div>
+    <main>
+        <div class="carousel-wrapper">
+            <div class="carousel-container">
+                <div class="carousel-track">
 
-        <div class="info-block block-3">
-            <p>The firm is led by **Mechanical Engineering Graduates** with over 35 years of experience in the industrial and commercial sectors, specifically in:</p>
-            <div class="list-content">
-                <ul>
-                    <li>Project Management</li>
-                    <li>Electromechanical Installations</li>
-                    <li>Advanced Machine Control Systems</li>
-                    <li>Procurement</li>
-                    <li>Contract Management</li>
-                </ul>
+                    <div class="carousel-item" data-caption="Assembly shop with BBT, Lighting duct, Compressed air line etc.">
+                        <img src="images/assembly_shop.jpg" alt="Assembly Shop Installation">
+                    </div>
+
+                    <div class="carousel-item" data-caption="630 Kva Transformer installation.">
+                        <img src="images/630kva_transformer.jpg" alt="630 KVA Transformer">
+                    </div>
+
+                    <div class="carousel-item" data-caption="A/C Panel board.">
+                        <img src="images/a_c_panel.jpg" alt="A/C Panel Board">
+                    </div>
+                    <div class="carousel-item" data-caption="ACP work.">
+                        <img src="images/acp_work_1.jpg" alt="ACP Work Plant 1">
+                    </div>
+                    <div class="carousel-item" data-caption="ACP work.">
+                        <img src="images/acp_work_2.jpg" alt="ACP Work Plating Plant">
+                    </div>
+                    <div class="carousel-item" data-caption="500 Kva DG installation.">
+                        <img src="images/500kva_dg.png" alt="500 KVA DG Installation">
+                    </div>
+                    <div class="carousel-item" data-caption="Electroplating plant control panel.">
+                        <img src="images/ep_control_panel.jpg" alt="Electroplating Control Panel">
+                    </div>
+                    <div class="carousel-item" data-caption="1500 Kva DG Synchronising panel. ">
+                        <img src="images/1500kva_dg_synch_panel.jpg" alt="1500 Kva DG Synch. panel">
+                    </div>
+                    <div class="carousel-item" data-caption="1500 Kva DG installation.">
+                        <img src="images/1500kva_dg.jpg" alt="1500 Kva DG">
+                    </div>
+                    <div class="carousel-item" data-caption="1500 Kva DG Exhaust stack - 30 meter height.">
+                        <img src="images/1500kva_dg_stack.jpg" alt="1500 Kva DG stack">
+                    </div>
+                </div>
+                <button class="carousel-arrow arrow-left" aria-label="Previous Slide" disabled>
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12Z"/></svg>
+                </button>
+                <button class="carousel-arrow arrow-right" aria-label="Next Slide">
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12Z"/></svg>
+                </button>
+            </div>
+
+            <div class="carousel-caption" id="carousel-caption-text">
+                Assembly shop with BBT, Lighting duct, Compressed air line etc.
             </div>
         </div>
-        
+        <!--<div class="project-gallery-footer">
+            <h2>Project Gallery</h2>
+        </div>-->
     </main>
-    
-    <section id="mission-vision">
-        <h2 class="section-title">Our Mission & Vision</h2>
-        <div class="mv-container">
-            <div class="mv-box">
-                <i class="fas fa-crosshairs"></i>
-                <h3>Our Mission</h3>
-                <p>To deliver **innovative and reliable engineering solutions** that exceed client expectations while maintaining the highest standards of quality, safety, and sustainability. We aim to be a trusted partner in project execution.</p>
-            </div>
-            <div class="mv-box">
-                <i class="fas fa-mountain"></i>
-                <h3>Our Vision</h3>
-                <p>To be the **leading engineering solutions provider** in the region, recognized for our technical excellence, professional integrity, and commitment to driving progress in the construction and industrial sectors.</p>
-            </div>
-        </div>
-    </section>
-    <section id="faq-section" class="content-section">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    What primary services does Tezex Engineering offer?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>We specialize in comprehensive engineering solutions, including civil construction, industrial fabrication, project management, and structural design consultancy. Our focus is on delivering high-quality, reliable, and timely services for both commercial and industrial clients.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    Which regions do you currently operate in?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Our main operations are centered in **Ernakulam, Kerala**, but we are equipped and ready to take on projects across the entire state of Kerala and are open to expanding our services to other parts of South India based on project scale and requirements.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    What is your process for starting a new project?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Our process begins with an initial **consultation** to understand your needs. This is followed by a **site assessment**, detailed **proposal and quotation**, contract finalization, and then the structured **execution** phase, complete with regular client updates and quality checks.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    How do you ensure the quality of your engineering work?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Quality is our top priority. We adhere strictly to national and international engineering standards, use high-grade materials, employ experienced and certified personnel, and implement a rigorous, multi-stage **Quality Assurance (QA) and Quality Control (QC)** program throughout every project.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    Can I get a custom quote for a large-scale industrial project?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolutely. We encourage potential clients for large-scale or complex industrial projects to contact us directly via email at **tezexeng@gmail.com** or call us. We will schedule a dedicated meeting to discuss the scope and prepare a tailored, comprehensive quotation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="content-section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-map-container">
-            <div class="contact-details">
-                <h2>Our Contact Details</h2>
-                <hr>
-                <p class="detail-label"><i class="fas fa-map-marker-alt" style="color:#FF9800;"></i> Address:</p>
-                <p class="address-text">
-                    <strong>TEZEX ENGINEERING SOLUTIONS LLP</strong><br>
-                    38/133, NAMBOORIMADAM CENTRE,<br>
-                    PATHADIPPALAM, EDAPPALLY,<br>
-                    ERNAKULAM, KERALA, PIN-682024.
-                </p>
-
-                <p class="detail-label"><i class="fas fa-mobile-alt" style="color:#FF9800;"></i> Mobile:</p>
-                <p class="mobile-text">
-                    <a href="tel:+919895709597">+91 9895709597</a>, 
-                    <a href="tel:+919400264581">+91 9400264581</a>
-                </p>
-
-                <p class="detail-label"><i class="fas fa-envelope" style="color:#FF9800;"></i> Email:</p>
-                <p class="email-text">
-                    <a href="mailto:tezexeng@gmail.com">tezexeng@gmail.com</a>
-                </p>
-            </div>
-            
-            <div class="map-embed">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15679.976537380922!2d76.31471392652438!3d10.035411786196236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c55d3129469%3A0x6b2c21226079c656!2sPathadipalam%20Metro%20Station!5e0!3m2!1sen!2sin!4v1660990862590!5m2!1sen!2sin" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    
-    <div style="height: 100px;"></div> <footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-logo-col">
                 <div class="footer-logo-section">
                     <a href="/tezex/" class="logo-link">
-                    <img src="/tezex/images/logo.png" alt="Tezex Logo" />
+                    <img src="images/logo.png" alt="Tezex Logo" />
                 </div>
                 <p>YOU CAN RELY ON US FOR QUALITY WORK</p>
             </div>
@@ -916,11 +545,11 @@
             <div class="footer-links-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><i class="fas fa-caret-right"></i> <a href="/tezex/" class="active">Home</a></li>
-                    <li><i class="fas fa-caret-right"></i> <a href="#about" class="active">About</a></li>
-                    <li><i class="fas fa-caret-right"></i> <a href="services/">Services</a></li>
-                    <li><i class="fas fa-caret-right"></i> <a href="#contact">Contact</a></li>
-                    <li><i class="fas fa-caret-right"></i> <a href="gallery/">Gallery</a></li>
+                    <li><i class="fas fa-caret-right"></i> <a href="/tezex/">Home</a></li>
+                    <li><i class="fas fa-caret-right"></i> <a href="/tezex/#about">About</a></li>
+                    <li><i class="fas fa-caret-right"></i> <a href="/tezexservices/">Services</a></li>
+                    <li><i class="fas fa-caret-right"></i> <a href="/tezex/#contact">Contact</a></li>
+                    <li><i class="fas fa-caret-right"></i> <a href="/tezex/gallery/">Gallery</a></li>
                 </ul>
             </div>
 
@@ -942,31 +571,23 @@
 
     <script>
         // Back-to-Top Button Script
-    const backToTopButton = document.getElementById('back-to-top');
+        const backToTopButton = document.getElementById('back-to-top');
+        window.onscroll = function() {scrollFunction()};
 
-    function scrollFunction() {
-        // Check if the user has scrolled down more than 150px
-        if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        function scrollFunction() {
+          if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
             backToTopButton.style.display = "block";
-        } else {
+          } else {
             backToTopButton.style.display = "none";
+          }
         }
-    }
 
-    // CRITICAL FIX: Run the function once on load to set the initial state
-    scrollFunction(); 
-
-    // Then, bind the function to the scroll event
-    window.onscroll = function() {scrollFunction()};
-
-    // Click handler for smooth scroll
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
+        backToTopButton.addEventListener('click', function() {
+          window.scrollTo({
             top: 0,
             behavior: 'smooth' 
+          });
         });
-    });
-
         
         // Hamburger Menu Script
         const menuToggle = document.getElementById('menu-toggle');
@@ -986,39 +607,52 @@
             }
         });
 
-        // FAQ Toggle Script
-        const faqItems = document.querySelectorAll('.faq-item');
+        // ====================================
+        // NEW JAVASCRIPT FOR IMAGE CAROUSEL
+        // ====================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.carousel-track');
+            const items = Array.from(document.querySelectorAll('.carousel-item'));
+            const prevButton = document.querySelector('.arrow-left');
+            const nextButton = document.querySelector('.arrow-right');
+            const captionElement = document.getElementById('carousel-caption-text');
+            const itemCount = items.length;
+            let currentIndex = 0;
 
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close any currently active FAQ item before opening the new one
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                
-                // Toggle the 'active' class on the clicked item
-                item.classList.toggle('active');
+            // Function to update the carousel's visual state
+            const updateCarousel = () => {
+                // Calculate the amount to translate (move) the track
+                const translateAmount = -currentIndex * 100;
+                track.style.transform = 'translateX(' + translateAmount + '%)';
+
+                // Update the image caption
+                captionElement.textContent = items[currentIndex].getAttribute('data-caption');
+
+                // Update button disabled state
+                prevButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex === itemCount - 1;
+            };
+
+            // Event listener for the Next button
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < itemCount - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
             });
+
+            // Event listener for the Previous button
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                    }
+            });
+
+            // Initialize the carousel on load
+            updateCarousel();
         });
     </script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
